@@ -2,14 +2,15 @@ package dataPackage;
 
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Insets;
 import java.awt.event.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.zip.DataFormatException;
+
 
 import javax.swing.filechooser.*;
 class Application extends JFrame implements ActionListener {
@@ -28,10 +29,11 @@ class Application extends JFrame implements ActionListener {
  public static void main(String args[])
  {
      // frame to contains GUI elements
-     JFrame f = new JFrame("file chooser");
+     JFrame f = new JFrame("Management Report Tool");
 
      // set the size of the frame
-     f.setSize(400, 400);
+     f.setSize(500, 500);
+     f.setLocationRelativeTo(null);
 
      // set the frame's visibility
      f.setVisible(true);
@@ -42,7 +44,7 @@ class Application extends JFrame implements ActionListener {
      JButton button1 = new JButton("Make Report");
 
      // button to open open dialog
-     JButton button2 = new JButton("Open");
+     JButton button2 = new JButton("Select File");
 
      // make an object of the class filechooser
      Application f1 = new Application();
@@ -57,6 +59,7 @@ class Application extends JFrame implements ActionListener {
      JPanel p = new JPanel();
     
      p.setLayout(new BorderLayout(100,100));
+     p.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
 
      // add buttons to the frame
      button1.setPreferredSize(new Dimension(70, 70));
@@ -66,11 +69,15 @@ class Application extends JFrame implements ActionListener {
      p.add(button1,BorderLayout.SOUTH);;
 
      // set the label to its initial value
-     l = new JLabel("no file selected");
-    
+     l = new JLabel("Please Select a CSV File to Generate a Report");
+ 
 
      // add panel to the frame
      p.add(l,BorderLayout.CENTER);
+     
+     l.setHorizontalAlignment(JLabel.CENTER);
+     l.setVerticalAlignment(JLabel.CENTER);
+     
      f.add(p);
 
      f.setVisible(true);
@@ -81,7 +88,7 @@ class Application extends JFrame implements ActionListener {
      String com = evt.getActionCommand();
     
 
-     if (com.equals("Open")) {
+     if (com.equals("Select File")) {
     	 
          // create an object of JFileChooser class
          JFileChooser j = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
@@ -106,12 +113,9 @@ class Application extends JFrame implements ActionListener {
              p = Paths.get(j.getSelectedFile().getAbsolutePath());
              
          }
-         // if the user cancelled the operation
-         else
-             l.setText("the user cancelled the operation");
      }
      
-     if(com.equals("Make Report")) {
+     if(com.equals("Make Report") && p!= null ) {
     
     	 System.out.print(p);
     	 Reader r = new Reader();
