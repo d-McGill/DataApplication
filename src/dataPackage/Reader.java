@@ -16,6 +16,7 @@ public class Reader {
 	
 	
 	public void loadData(Path p) throws Exception {	
+	
 		try {
 			//open the file
 			BufferedReader reader = Files.newBufferedReader(p);
@@ -37,18 +38,26 @@ public class Reader {
 				//create an Aircraft object, and set (some of) its properties
 				Person person = new Person();
 				person.addName(name);
+				person.addVanNum(vanNum);
 			
 				
 				//add the aircraft to our list
 				personList.add(person);
 				
-				System.out.println("Person " +	name);
+				System.out.println("Person: " +	name + "vanNum: " + vanNum);
 			}
 		}
 		
-		catch (IOException ioe) {
+		catch ( IOException ioe) {
 			//There was a problem reading the file
 			throw new Exception(ioe);
+		
+		}
+		
+		catch (Exception e) {
+			//There was a problem reading the file
+			throw new Exception(e);
+		
 		}
 
 	}

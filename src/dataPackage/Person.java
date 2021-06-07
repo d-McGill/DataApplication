@@ -6,8 +6,7 @@ public class Person {
 	int vanNum;
 	
 	public Person() {
-		this.name=name;
-		this.vanNum=vanNum;
+
 	}
 	
 	
@@ -16,6 +15,13 @@ public class Person {
 		name = this.name;
 		
 		return name;
+		
+	}
+	
+	public int addVanNum(int vanNum) {
+		vanNum = this.vanNum;
+		
+		return vanNum;
 		
 	}
 
